@@ -16,14 +16,18 @@ document.addEventListener("DOMContentLoaded", () => {
       // Populate activities list
       Object.entries(activities).forEach(([name, details]) => {
         const activityCard = document.createElement("div");
-        activityCard.className = "activity-card";
+        activityCard.className = "activity-card modern-card";
 
         const spotsLeft = details.max_participants - details.participants.length;
 
-        // Generate participants list
+        // Generate participants list with modern badges
         const participantsList = details.participants.length
-          ? `<ul>${details.participants.map(participant => `<li>${participant}</li>`).join("")}</ul>`
-          : "<p>No participants yet.</p>";
+          ? `
+          <div class="participants-container">
+            ${details.participants.map(participant => `<span class="participant-badge">${participant}</span>`).join("")}
+          </div>
+        `
+          : "<p class='no-participants'>No participants yet.</p>";
 
         activityCard.innerHTML = `
           <h4>${name}</h4>
